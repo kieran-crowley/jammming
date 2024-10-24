@@ -1,0 +1,2 @@
+2 branches, main and develop, everything gets put into develop, once confident, it goes to main. 
+small brances made to add features merged into develop and delete.

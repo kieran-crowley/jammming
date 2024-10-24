@@ -1,23 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
+import SearchBar from "./compononets/SearchBar/SearchBar";
+import Button from "./compononets/Button/Button";
+import SearchResults from "./compononets/SearchResults/SearchResults";
+
 
 function App() {
+  //import api here. 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. this is somthingd
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SearchBar> </SearchBar>
+      <Button value='Search'></Button>
+      <SearchResults></SearchResults>
+
+
     </div>
   );
 }
