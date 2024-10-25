@@ -1,8 +1,15 @@
 import React from "react";
 import styles from "./Track.module.css";
 
-function Track() {
-  return <p>track</p>;
+function Track(props) {
+  return (
+    <div id={props.id}>
+      <p>{props.artist}</p>
+      <p>{props.song}</p>
+      <p>{props.album}</p>
+      <br></br>
+    </div>
+  );
 }
 
 export default Track;
