@@ -18,7 +18,7 @@ function TrackList(state) {
     );
   });
 
-  return <>{toRender};</>;
+  return <>{toRender}</>;
 }
 
 export default TrackList;

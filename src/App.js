@@ -1,5 +1,6 @@
 import "./App.css";
-import TrackList from "./compononets/Tracklist/Tracklist";
+// import TrackList from "./compononets/Tracklist/Tracklist";
+import PlayList from "./compononets/Playlist/Playlist";
 
 function App() {
   const trackList = [
@@ -13,6 +14,13 @@ function App() {
     },
   ];
 
-  return <TrackList data={trackList}></TrackList>;
+  const playList = `kierans family charts`;
+
+  return (
+    <>
+      {/* <TrackList data={trackList}></TrackList> */}
+      <PlayList playlistname={playList} tracks={trackList}></PlayList>
+    </>
+  );
 }
 export default App;
