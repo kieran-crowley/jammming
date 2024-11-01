@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Tracklist.module.css";
 import Track from "../Track/Track";
 
-function TrackList(state) {
-  const toRender = state.data.map((item) => {
+function TrackList(props) {
+  if (props.data == null) return;
+  const toRender = props.data.map((item, i) => {
     return (
-      <ul>
-        <li key={item.key}>
+      <>
+        <li>
           <Track
-            id={item.id}
+            key={item.i}
+            id={item.i}
             song={item.song}
             artist={item.artist}
             album={item.album}
           ></Track>
+          <button onClick={()=> props.playlistfunction(item)}>+</button>
         </li>
-      </ul>
+      </>
     );
   });
 
-  return <>{toRender}</>;
+  return <ul>{toRender}</ul>;
 }
 
 export default TrackList;
