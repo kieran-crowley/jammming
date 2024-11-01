@@ -36,7 +36,6 @@ function App() {
       <Playlist
         playlistfunction={removeSongFromPlaylist}
         playlistName={playlistName}
-        setName={setName}
         data={playlist}
         title={playlistName}
         onChange={setName}

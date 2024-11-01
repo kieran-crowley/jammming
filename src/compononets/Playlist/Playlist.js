@@ -22,7 +22,7 @@ function PlayList(props) {
   });
   return (
     <div>
-        <input value={props.playlistName} onChange={props.setName}></input>
+        <input value={props.playlistName} onChange={props.onChange}></input>
         <ul>{toRender}</ul>
     </div>
   );
