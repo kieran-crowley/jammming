@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./SaveToSpotifyButton.module.css";
 
-function SaveToSpotifyButton(props) {
+function SaveToSpotifyButton() {
   return (
     <>
-      <button> {props.children}</button>
+      <button>SaveToSpotifyButton</button>
     </>
   );
 }

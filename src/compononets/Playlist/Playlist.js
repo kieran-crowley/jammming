@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
+import SaveToSpotifyButton from "../SaveToSpotifyButton/SaveToSpotifyButton";
 
 function PlayList(props) {
   if (props.data == null) return;
@@ -15,15 +16,16 @@ function PlayList(props) {
             artist={item.artist}
             album={item.album}
           ></Track>
-           <button onClick={()=> props.playlistfunction(item)}>-</button>
+          <button onClick={() => props.playlistfunction(item)}>-</button>
         </li>
+        <SaveToSpotifyButton></SaveToSpotifyButton>
       </>
     );
   });
   return (
     <div>
-        <input value={props.playlistName} onChange={props.onChange}></input>
-        <ul>{toRender}</ul>
+      <input value={props.playlistName} onChange={props.onChange}></input>
+      <ul>{toRender}</ul>
     </div>
   );
 }
