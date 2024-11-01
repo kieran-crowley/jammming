@@ -1,27 +1,50 @@
 import "./App.css";
-import React from "react";
-import PlayList from "./compononets/Playlist/Playlist";
+import React, { useState } from "react";
+import SearchBar from "./compononets/SearchBar/SearchBar";
 import TrackList from "./compononets/Tracklist/Tracklist";
+import Playlist from "./compononets/Playlist/Playlist";
 
 function App() {
   const tracks = [
-    { id: 1, song: "kieran-can-sing", artist: "kieran", album: "kieransAlbum" },
-    { id: 2, song: "sarin-can-sing", artist: "sarin", album: "sarinsAlbum" },
-    { id: 3, song: "annabeth-can-sing", artist: "annabeth", album: "annabethsAlbum" },
+    { key: 0, id: 0, song: "kieran-can-sing", artist: "kieran", album: "kieransAlbum" },
+    { key: 1, id: 1, song: "sarin-can-sing", artist: "sarin", album: "sarinsAlbum" },
+    { key: 2, id: 2, song: "annabeth-can-sing", artist: "annabeth", album: "annabethsAlbum" },
   ];
 
-  const userAddsName = `kierans family charts`;
-  const userAddsSong = [tracks[0], tracks[2]]
+  const [data, setData] = useState(tracks);
+  const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setPlaylistName] = useState("eer");
+
+  const addSongToPlayList = (track) => {
+    if (playlist.includes(track)) return;
+    setPlaylist((current) => [...current, track]);
+  };
+
+  const removeSongFromPlaylist = (track) => {
+    const filtered = playlist.filter((item) => item !== track);
+    setPlaylist(filtered);
+  };
+
+  const setName = ({ target }) => {
+    setPlaylistName(target.value);
+  };
 
   return (
     <>
-      <TrackList data={tracks}></TrackList>
-      <PlayList playlistname={userAddsName} tracks={userAddsSong}></PlayList>
+      <SearchBar></SearchBar>
+      <TrackList data={data} playlistfunction={addSongToPlayList}></TrackList>
+      <Playlist
+        playlistfunction={removeSongFromPlaylist}
+        playlistName={playlistName}
+        setName={setName}
+        data={playlist}
+        title={playlistName}
+        onChange={setName}
+      ></Playlist>
     </>
   );
 }
 export default App;
 
-// Your Jammming web app should allow users to add songs from the search results to their custom playlist.
-// implement a method that adds a selected song from the search results track list to the user’s custom playlist.
-// The method should be triggered when the user clicks an “add” button displayed next to each track in the search results list.
+// The root component should pass down the search results to
+// a child component that will return each individual track to be rendered.

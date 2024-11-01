@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Playlist.module.css";
-import TrackList from "../Tracklist/Tracklist";
+import Track from "../Track/Track";
 
 function PlayList(props) {
-  // const [playListTracks, setplayListTracks] = useState([]);
-  // const [playListName, setPlayListName] = useState([]);
-
-  // setplayListTracks((prev) => {
-  //     return [props.tracks, ...prev];
-  // })
-
-  // setPlayListName((prev) => {
-  //     return [props.tracks, ...prev];
-  // })
-
+  if (props.data == null) return;
+  const toRender = props.data.map((item, i) => {
+    return (
+      <>
+        <li>
+          <Track
+            key={item.i}
+            id={item.i}
+            song={item.song}
+            artist={item.artist}
+            album={item.album}
+          ></Track>
+           <button onClick={()=> props.playlistfunction(item)}>-</button>
+        </li>
+      </>
+    );
+  });
   return (
-    <>
-      <h1>{props.playlistname}</h1>
-      <TrackList data={props.tracks}></TrackList>
-    </>
+    <div>
+        <input value={props.playlistName} onChange={props.setName}></input>
+        <ul>{toRender}</ul>
+    </div>
   );
 }
 
