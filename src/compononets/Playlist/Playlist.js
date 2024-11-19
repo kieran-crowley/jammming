@@ -1,31 +1,26 @@
 import React from "react";
-import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
 import SaveToSpotifyButton from "../SaveToSpotifyButton/SaveToSpotifyButton";
 
 function PlayList(props) {
+  const playlistName = props.playlistName;
   if (props.data == null) return;
-  const toRender = props.data.map((item, i) => {
+  const toRender = props.data.map((item) => {
     return (
       <>
         <li>
-          <Track
-            key={item.i}
-            id={item.i}
-            song={item.song}
-            artist={item.artist}
-            album={item.album}
-          ></Track>
-          <button onClick={() => props.playlistfunction(item)}>-</button>
+          <Track id={item.id} key={item.key} song={item.song} artist={item.artist} album={item.album}></Track>
+          <button onClick={() => props.removeSongFromPlaylist(item)}>-</button>
         </li>
-        <SaveToSpotifyButton></SaveToSpotifyButton>
       </>
     );
-  });
+  }); //each item from playlist from app.js is turned into li element.
   return (
     <div>
-      <input value={props.playlistName} onChange={props.onChange}></input>
-      <ul>{toRender}</ul>
+      <input value={props.playlistName} onChange={props.onChange}></input> {/* single input for playlist */}
+      <ul>{toRender}</ul> {/* from function above, contains each track */}
+      <button onClick={props.onClick}>save to spotidy</button>
+      <SaveToSpotifyButton playlistName={props.playlistName} data={props.data}></SaveToSpotifyButton> {/* send data into the fetch? */}
     </div>
   );
 }

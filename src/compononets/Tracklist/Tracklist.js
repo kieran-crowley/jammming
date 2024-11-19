@@ -8,14 +8,8 @@ function TrackList(props) {
     return (
       <>
         <li>
-          <Track
-            key={item.i}
-            id={item.i}
-            song={item.song}
-            artist={item.artist}
-            album={item.album}
-          ></Track>
-          <button onClick={()=> props.playlistfunction(item)}>+</button>
+          <Track key={item.key} id={item.id} song={item.song} artist={item.artist} album={item.album}></Track>
+          <button onClick={() => props.function(item)}>+</button>
         </li>
       </>
     );
