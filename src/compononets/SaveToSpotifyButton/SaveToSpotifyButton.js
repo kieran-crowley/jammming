@@ -4,21 +4,13 @@ import { getAccessToken, handleLogIn } from "../../app.module";
 import PlayList from "../Playlist/Playlist";
 
 function SaveToSpotifyButton(props) {
-  const [token, setToken] = useState();
   const [data, setData] = useState({});
   const [user_id, setUser_id] = useState("");
   const baseUrl = `https://api.spotify.com`;
   let uri = [];
+  let token = props.token;
 
-  useEffect(() => {
-    if (window.location.hash) {
-      setToken(getAccessToken().access_token);
-    } else {
-      handleLogIn();
-    }
-  });
-
-  props.data.forEach((element) => {
+  props.tracks.forEach((element) => {
     uri.push(element.uri);
   });
 
@@ -36,7 +28,7 @@ function SaveToSpotifyButton(props) {
         const userName = await userID.json();
         setUser_id(userName.id);
         return userName.id;
-        console.log(user_id);
+        // console.log(user_id);
       } else {
         throw Error("getID not working very well");
       }
@@ -67,7 +59,7 @@ function SaveToSpotifyButton(props) {
 
   const createNewPlayList = async () => {
     let user_id = await getUserID();
-    console.log("userID", user_id);
+    // console.log("userID", user_id);
     const URL = `${baseUrl}/v1/users/${user_id}/playlists`;
     const playListName = props.playlistName;
 
@@ -85,7 +77,7 @@ function SaveToSpotifyButton(props) {
       const response = await fetch(URL, options);
       if (response.ok) {
         const responceJson = await response.json();
-        console.log("playlist responce", responceJson);
+        // console.log("playlist responce", responceJson);
         return responceJson.id;
       } else {
         throw Error("somting rong");
@@ -111,7 +103,7 @@ function SaveToSpotifyButton(props) {
       const responce = await fetch(URL, options);
       if (responce.ok) {
         const jsonResponse = await responce.json();
-        console.log(jsonResponse);
+        // console.log(jsonResponse);
       } else {
         throw Error("somthong wrong with adding song tp a playlist");
       }
@@ -122,22 +114,19 @@ function SaveToSpotifyButton(props) {
 
   const mainFunction = async () => {
     getUserID();
-    console.log("should be saved in playlist: ", uri);
+    // console.log("should be saved in playlist: ", uri);
     const newPlaylistID = await createNewPlayList(); //already has name.
     addSongToPlayList(newPlaylistID, uri);
-    console.log("main function has now been called");
+    // console.log("main function has now been called");
   };
 
-  console.log("items should be in online playlist", uri);
-  // create new playlists on the user’s Spotify account
-  // with the playlist’s custom name and add the tracks
-  // from the user’s custom playlist to the new playlist
+  // console.log("items should be in online playlist", uri);
+
 
   return (
     <>
-      {/* <button onClick={() => addSongToPlayList("3JAL80kbIbuscg3pYT7xmU")}>SaveToSpotifyButton</button>
-      <button onClick={() => handleLogIn()}>newToken</button> */}
-      {/* <button onClick={mainFunction}>MAIN FUNCTION</button> */}
+      {/* <button onClick={() => handleLogIn()}>newToken</button> */}
+      <button onClick={mainFunction}>save to online account</button>
     </>
   );
 }
