@@ -10,9 +10,11 @@ function SaveToSpotifyButton(props) {
   let uri = [];
   let token = props.token;
 
-  props.tracks.forEach((element) => {
-    uri.push(element.uri);
-  });
+  if (props.tracks != null) {
+    props.tracks.forEach((element) => {
+      uri.push(element.uri);
+    });
+  }
 
   const getUserID = async () => {
     const URL = `${baseUrl}/v1/me`;
@@ -114,14 +116,13 @@ function SaveToSpotifyButton(props) {
 
   const mainFunction = async () => {
     getUserID();
-    // console.log("should be saved in playlist: ", uri);
+    console.log("should be saved in playlist: ", uri);
     const newPlaylistID = await createNewPlayList(); //already has name.
     addSongToPlayList(newPlaylistID, uri);
-    // console.log("main function has now been called");
+    console.log("main function has now been called");
   };
 
-  // console.log("items should be in online playlist", uri);
-
+  console.log("items should be in online playlist", uri);
 
   return (
     <>

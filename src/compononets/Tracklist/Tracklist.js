@@ -3,7 +3,7 @@ import styles from "./Tracklist.module.css";
 import Track from "../Track/Track";
 
 function TrackList(props) {
-  console.log(props.tracks);
+  // console.log("tracks from tracklist", props.tracks);
 
   if (props.tracks == null) return;
 
@@ -12,7 +12,7 @@ function TrackList(props) {
       <>
         <li>
           <Track id={item.id} name={item.name} artist={item.artists} album={item.album}></Track>
-          <button onClick={() => props.addsong(item)}>+</button>
+          <button onClick={() => props.function(item)}>{props.type}</button>
         </li>
       </>
     );

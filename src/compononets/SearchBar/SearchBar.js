@@ -41,7 +41,7 @@ function SearchBar(props) {
         <input id="input" type="text" value={value} onChange={onChange}></input>
       </form>
       <SearchButton onClick={search}></SearchButton>
-      <SearchResults tracks={searchResults}></SearchResults>
+      <SearchResults tracks={searchResults} function={props.function}></SearchResults>
     </div>
   );
 }

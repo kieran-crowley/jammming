@@ -5,14 +5,13 @@ import TrackList from "./compononets/Tracklist/Tracklist";
 import Playlist from "./compononets/Playlist/Playlist";
 import { getAccessToken, handleLogIn } from "./app.module";
 
-function App() {
-  const data = [
-    { id: 0, name: "kieran-can-sing", artist: "kieran", album: "kieransAlbum" },
-    { id: 1, name: "sarin-can-sing", artist: "sarin", album: "sarinsAlbum" },
-    { id: 2, name: "annabeth-can-sing", artist: "annabeth", album: "annabethsAlbum" },
-  ];
+// const data = [
+//   { id: 0, name: "kieran-can-sing", artist: "kieran", album: "kieransAlbum" },
+//   { id: 1, name: "sarin-can-sing", artist: "sarin", album: "sarinsAlbum" },
+//   { id: 2, name: "annabeth-can-sing", artist: "annabeth", album: "annabethsAlbum" },
+// ];
 
-  const [tracks, setTracks] = useState(data);
+function App() {
   const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState("playlist name");
   const [savedplaylist, setSavedplaylist] = useState({});
@@ -26,15 +25,10 @@ function App() {
     }
   });
 
-  const URI = ["spotify:track:6eTGxxQxiTFE6LfZHC33Wm", "spotify:track:4QHfFzsVXbLewUmI2UMel5", "spotify:track:4sCCZW0ezEPAexAidFsoVm"];
-
-  tracks.forEach((item, i) => {
-    item.uri = URI[i];
-  });
-
   const addSongToPlayList = (track) => {
     if (playlist.includes(track)) return;
     setPlaylist((current) => [...current, track]);
+    console.log("called");
   };
 
   const removeSongFromPlaylist = (track) => {
@@ -46,20 +40,17 @@ function App() {
     setPlaylistName(target.value);
   };
 
-  const SaveOfflinePlaylist = () => {
+  const saveOfflinePlaylist = () => {
     setSavedplaylist({ [playlistName]: playlist });
-    // setPlaylistName("");
     setPlaylist([]);
-    // console.log("saved platlist", savedplaylist);
   };
+  console.log("saved platlist", savedplaylist);
+  console.log("inside playlist", playlist);
   return (
     <>
-      <SearchBar token={token}></SearchBar>
-      <TrackList tracks={tracks} addsong={addSongToPlayList}></TrackList>
-      <Playlist token={token} onClick={SaveOfflinePlaylist} playlistName={playlistName} playlist={playlist} onChange={setName} removeSongFromPlaylist={removeSongFromPlaylist}></Playlist>
+      <SearchBar token={token} function={addSongToPlayList}></SearchBar>
+      <Playlist saveOfflinePlaylist={saveOfflinePlaylist} token={token} playlistName={playlistName} playlist={playlist} onChange={setName} function={removeSongFromPlaylist}></Playlist>
     </>
   );
 }
 export default App;
-
-//make the result of the fetch look the same as the data sent into the original of app.js

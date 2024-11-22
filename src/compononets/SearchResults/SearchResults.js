@@ -12,14 +12,14 @@ function SearchResults(props) {
       name: item.name,
       artists: item.artists[0].name,
       album: item.album.name,
+      uri: item.uri,
     });
   });
 
-  console.log("formatted", formatProps);
   return (
     <>
       <h2>Results</h2>
-      <TrackList tracks={formatProps}></TrackList>
+      <TrackList function={props.function} tracks={formatProps} type={"add"}></TrackList>
     </>
   );
 }
