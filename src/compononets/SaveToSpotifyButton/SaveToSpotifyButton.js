@@ -116,13 +116,13 @@ function SaveToSpotifyButton(props) {
 
   const mainFunction = async () => {
     getUserID();
-    console.log("should be saved in playlist: ", uri);
     const newPlaylistID = await createNewPlayList(); //already has name.
     addSongToPlayList(newPlaylistID, uri);
     console.log("main function has now been called");
+    window.location = "http://localhost:3000/";
   };
 
-  console.log("items should be in online playlist", uri);
+  // console.log("should be saved in playlist: ", uri);
 
   return (
     <>

@@ -42,6 +42,7 @@
 #root {
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -50,6 +51,18 @@ button {
 }
 
 input {
-  width: 50;
   height: 50px;
+  margin: 10px;
+}
+
+li {
+  display: block;
+}
+
+button {
+  border-radius: 80%;
+}
+
+ul {
+  padding: 0;
 }

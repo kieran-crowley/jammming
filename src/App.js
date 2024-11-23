@@ -26,9 +26,8 @@ function App() {
   });
 
   const addSongToPlayList = (track) => {
-    if (playlist.includes(track)) return;
+    if (JSON.stringify(playlist).includes(JSON.stringify(track))) return;
     setPlaylist((current) => [...current, track]);
-    console.log("called");
   };
 
   const removeSongFromPlaylist = (track) => {
@@ -44,7 +43,7 @@ function App() {
     setSavedplaylist({ [playlistName]: playlist });
     setPlaylist([]);
   };
-  console.log("saved platlist", savedplaylist);
+  // console.log("saved platlist", savedplaylist);
   console.log("inside playlist", playlist);
   return (
     <>

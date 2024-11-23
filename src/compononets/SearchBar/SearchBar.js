@@ -36,10 +36,11 @@ function SearchBar(props) {
   }; //both saves and returns, only need one?.
 
   return (
-    <div>
+    <div className={styles.SearchBarStyle}>
       <form onSubmit={search}>
         <input id="input" type="text" value={value} onChange={onChange}></input>
       </form>
+      <ul></ul>
       <SearchButton onClick={search}></SearchButton>
       <SearchResults tracks={searchResults} function={props.function}></SearchResults>
     </div>
