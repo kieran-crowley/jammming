@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./SaveToSpotifyButton.module.css";
-import { getAccessToken, handleLogIn } from "../../app.module";
-import PlayList from "../Playlist/Playlist";
 
 function SaveToSpotifyButton(props) {
   const [data, setData] = useState({});
@@ -39,25 +37,25 @@ function SaveToSpotifyButton(props) {
     }
   }; //both saves and returns, only need one?.
 
-  const getPlayList = async () => {
-    const url = `${baseUrl}/v1/playlists/3cEYpjA9oz9GiPac4AsH4n`;
+  // const getPlayList = async () => {
+  //   const url = `${baseUrl}/v1/playlists/3cEYpjA9oz9GiPac4AsH4n`;
 
-    try {
-      const response = await fetch(url, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setData(jsonResponse);
-      } else {
-        throw new Error("not working son");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //   try {
+  //     const response = await fetch(url, {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     });
+  //     if (response.ok) {
+  //       const jsonResponse = await response.json();
+  //       setData(jsonResponse);
+  //     } else {
+  //       throw new Error("not working son");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const createNewPlayList = async () => {
     let user_id = await getUserID();
@@ -105,7 +103,7 @@ function SaveToSpotifyButton(props) {
       const responce = await fetch(URL, options);
       if (responce.ok) {
         const jsonResponse = await responce.json();
-        // console.log(jsonResponse);
+        console.log(jsonResponse);
       } else {
         throw Error("somthong wrong with adding song tp a playlist");
       }
@@ -119,7 +117,8 @@ function SaveToSpotifyButton(props) {
     const newPlaylistID = await createNewPlayList(); //already has name.
     addSongToPlayList(newPlaylistID, uri);
     console.log("main function has now been called");
-    window.location = "http://localhost:3000/";
+    // window.location = "http://localhost:3000/";
+    props.setPlaylist([]);
   };
 
   // console.log("should be saved in playlist: ", uri);

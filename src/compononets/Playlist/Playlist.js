@@ -1,18 +1,27 @@
-import React from "react";
-import Track from "../Track/Track";
+import React, { useState } from "react";
 import SaveToSpotifyButton from "../SaveToSpotifyButton/SaveToSpotifyButton";
 import TrackList from "../Tracklist/Tracklist";
 import styles from "./Playlist.module.css";
 
 function PlayList(props) {
+  const [playlistName, setPlaylistName] = useState("playlist name");
+
+  const setName = ({ target }) => {
+    setPlaylistName(target.value);
+  };
+
+  const removeSongFromPlaylist = (track) => {
+    const filtered = props.playlist.filter((item) => item !== track);
+    props.setPlaylist(filtered);
+  };
+
+  console.log("inside playlist", props.playlist);
+
   return (
     <div className={styles.personalStyle}>
-      <input value={props.playlistName} onChange={props.onChange} />
-      <TrackList tracks={props.playlist} function={props.function} type={"remove"}></TrackList>
-      <button onClick={props.saveOfflinePlaylist}>
-        save to spotidy offline
-      </button >
-      <SaveToSpotifyButton token={props.token} playlistName={props.playlistName} tracks={props.playlist}></SaveToSpotifyButton>
+      <input value={playlistName} onChange={setName} />
+      <TrackList tracks={props.playlist} function={removeSongFromPlaylist} type={"remove"}></TrackList>
+      <SaveToSpotifyButton token={props.token} playlistName={props.playlistName} tracks={props.playlist} setPlaylist={props.setPlaylist}></SaveToSpotifyButton>
     </div>
   );
 }
