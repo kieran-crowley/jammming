@@ -14,6 +14,7 @@ function SearchBar(props) {
   const filterResults = (results) => {
     let formatProps = [];
     if (results == null) return;
+    console.log("results object", results);
 
     results.forEach((item) => {
       formatProps.push({
@@ -22,6 +23,7 @@ function SearchBar(props) {
         artists: item.artists[0].name,
         album: item.album.name,
         uri: item.uri,
+        preview: item.preview_url,
       });
     });
     props.setSearchResults(formatProps);

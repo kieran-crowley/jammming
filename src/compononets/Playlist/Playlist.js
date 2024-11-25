@@ -12,9 +12,9 @@ function PlayList(props) {
 
   return (
     <div className={styles.personalStyle}>
-      <input value={props.playlistName} placeholder={"Playlist Name"} onChange={setName} />
-      <TrackList tracks={props.playlist} function={props.removeSongFromPlaylist} type={"remove"}></TrackList>
-      <SaveToSpotifyButton token={props.token} playlistName={props.playlistName} tracks={props.playlist} setPlaylist={props.setPlaylist}></SaveToSpotifyButton>
+      <input value={playlistName} placeholder={"Playlist Name"} onChange={setName} />
+      <TrackList tracks={props.playlist} function={props.function} type={"remove"}></TrackList>
+      <SaveToSpotifyButton token={props.token} playlistName={playlistName} tracks={props.playlist} setPlaylist={props.setPlaylist}></SaveToSpotifyButton>
     </div>
   );
 }

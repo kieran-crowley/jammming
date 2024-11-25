@@ -27,10 +27,13 @@ function App() {
     setSearchResults((current) => [track, ...current]);
   };
 
+  console.log(searchResults);
   return (
     <>
       <SearchBar token={token} function={addSongToPlayList} searchResults={searchResults} setSearchResults={setSearchResults}></SearchBar>
-      <Playlist token={token} playlist={playlist} setPlaylist={setPlaylist} removeSongFromPlaylist={removeSongFromPlaylist}></Playlist>
+      {/* //gets results formts them and stores them inside results.  */}
+      <Playlist token={token} playlist={playlist} setPlaylist={setPlaylist} function={removeSongFromPlaylist}></Playlist>
+      {/* shows selected songs and allows you to add name, sends off to spotify server api */}
     </>
   );
 }
