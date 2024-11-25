@@ -121,8 +121,6 @@ function SaveToSpotifyButton(props) {
     props.setPlaylist([]);
   };
 
-  // console.log("should be saved in playlist: ", uri);
-
   return (
     <>
       {/* <button onClick={() => handleLogIn()}>newToken</button> */}

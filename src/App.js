@@ -5,9 +5,9 @@ import Playlist from "./compononets/Playlist/Playlist";
 import { getAccessToken, handleLogIn } from "./app.module";
 
 function App() {
-  const [playlist, setPlaylist] = useState([]); // current set
-  const [searchResults, setSearchResults] = useState();
-  const [token, setToken] = useState();
+  const [playlist, setPlaylist] = useState([]); // playlist holds selected songs.
+  const [searchResults, setSearchResults] = useState(); //results of search
+  const [token, setToken] = useState(); //auth token for api.
 
   useEffect(() => {
     if (window.location.hash) {
@@ -18,24 +18,15 @@ function App() {
   });
 
   const addSongToPlayList = (track) => {
-    if (JSON.stringify(playlist).includes(JSON.stringify(track))) return;
     setPlaylist((current) => [...current, track]);
-
-    //search result section remove from search
-    const filtered = searchResults.filter((item) => item.id != track.id); //change to !=
-    setSearchResults(filtered);
-    console.log("addtrack", track);
+    setSearchResults(searchResults.filter((item) => item.id !== track.id));
   };
 
   const removeSongFromPlaylist = (track) => {
-    const checkint = track;
-    const filtered = playlist.filter((item) => item != track);
-    setPlaylist(filtered); //everything inside current playlist except track
-
-    //search result section
-    setSearchResults((current) => [checkint, ...current]);
-    console.log("rem track", checkint);
+    setPlaylist(playlist.filter((item) => item !== track));
+    setSearchResults((current) => [track, ...current]);
   };
+
   return (
     <>
       <SearchBar token={token} function={addSongToPlayList} searchResults={searchResults} setSearchResults={setSearchResults}></SearchBar>
