@@ -5,10 +5,29 @@ import SearchResults from "../SearchResults/SearchResults";
 
 function SearchBar(props) {
   const [value, setValue] = useState("Search Song");
-  const [searchResults, setSearchResults] = useState();
+  console.log(props.searchResults);
+  const results = props.searchResults;
+  console.log("search bar", results);
 
   const onChange = ({ target }) => {
     setValue(target.value);
+  };
+
+  const filterResults = (results) => {
+    console.log(results);
+    let formatProps = [];
+    if (results == null) return;
+
+    results.forEach((item) => {
+      formatProps.push({
+        id: item.id,
+        name: item.name,
+        artists: item.artists[0].name,
+        album: item.album.name,
+        uri: item.uri,
+      });
+    });
+    props.setSearchResults(formatProps);
   };
 
   const search = async () => {
@@ -25,8 +44,10 @@ function SearchBar(props) {
       const result = await fetch(URL, options);
       if (result.ok) {
         const resultJson = await result.json();
-        setSearchResults(resultJson.tracks.items);
-        console.log("search results, saved: ", searchResults);
+        // props.setSearchResults(resultJson.tracks.items);
+        filterResults(resultJson.tracks.items);
+        console.log("search bar", resultJson.tracks.items);
+        console.log("search results, saved: ", props.searchResults);
       } else {
         throw Error("error finding song");
       }
@@ -42,7 +63,7 @@ function SearchBar(props) {
       </form>
       <ul></ul>
       <SearchButton onClick={search}></SearchButton>
-      <SearchResults tracks={searchResults} function={props.function}></SearchResults>
+      <SearchResults function={props.function} results={results}></SearchResults>
     </div>
   );
 }

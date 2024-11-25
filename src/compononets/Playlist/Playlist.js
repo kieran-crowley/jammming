@@ -10,17 +10,11 @@ function PlayList(props) {
     setPlaylistName(target.value);
   };
 
-  const removeSongFromPlaylist = (track) => {
-    const filtered = props.playlist.filter((item) => item !== track);
-    props.setPlaylist(filtered);
-  };
-
-  console.log("inside playlist", props.playlist);
 
   return (
     <div className={styles.personalStyle}>
-      <input value={playlistName} onChange={setName} />
-      <TrackList tracks={props.playlist} function={removeSongFromPlaylist} type={"remove"}></TrackList>
+      <input value={props.playlistName} onChange={setName} />
+      <TrackList tracks={props.playlist} function={props.removeSongFromPlaylist} type={"remove"}></TrackList>
       <SaveToSpotifyButton token={props.token} playlistName={props.playlistName} tracks={props.playlist} setPlaylist={props.setPlaylist}></SaveToSpotifyButton>
     </div>
   );
